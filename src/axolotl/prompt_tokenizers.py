@@ -242,6 +242,19 @@ class CompletionPromptTokenizingStrategy(InstructionPromptTokenizingStrategy):
         return next(iter(self.prompter.build_prompt(instruction, input, response)))
 
 
+class VicunaPromptTokenizingStrategy(InstructionPromptTokenizingStrategy):
+    """
+    Tokenizing strategy for Vicuna-1.1 prompts.
+    """
+
+    def parse_instruction_fields(self, prompt) -> Tuple[str, str, str]:
+        return (
+            prompt["instruction"],
+            None,
+            prompt["output"],
+        )
+
+
 class ReflectionPromptTokenizingStrategy(PromptTokenizingStrategy):
     """
     Tokenizing strategy for Reflection prompts.
